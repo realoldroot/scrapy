@@ -102,3 +102,9 @@ class ScrapystudyDownloaderMiddleware(object):
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+
+# 使用代理
+class ProxyMiddleware(object):
+    def process_request(self, request, spider):
+        # Set the location of the proxy
+        request.meta['proxy'] = "http://127.0.0.1:1080"

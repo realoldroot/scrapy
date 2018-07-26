@@ -39,8 +39,8 @@ ROBOTSTXT_OBEY = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'Accept-Language': 'en',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en',
 }
 
 # Enable or disable spider middlewares
@@ -51,9 +51,11 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'ScrapyStudy.middlewares.ScrapystudyDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'ScrapyStudy.middlewares.ScrapystudyDownloaderMiddleware': 543,
+    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+    'ScrapyStudy.middlewares.ProxyMiddleware': 100,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -63,12 +65,16 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# ImagePipeline的自定义实现类
 ITEM_PIPELINES = {
     # 'ScrapyStudy.pipelines.ScrapystudyPipeline': 300,
     'ScrapyStudy.pipelines.ImagePipline': 300
 }
 
+# 设置图片下载路径
 IMAGES_STORE = 'F:/images'
+
+IMAGES_EXPIRES = 90  # 90天内抓取的都不会被重抓
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

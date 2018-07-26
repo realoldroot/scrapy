@@ -16,5 +16,4 @@ class ScrapystudyItem(scrapy.Item):
 
 class ImageItem(scrapy.Item):
     image_url = scrapy.Field()
-
     name = scrapy.Field()
